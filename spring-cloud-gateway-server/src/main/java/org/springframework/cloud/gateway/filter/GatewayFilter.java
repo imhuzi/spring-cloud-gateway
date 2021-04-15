@@ -27,6 +27,8 @@ import org.springframework.web.server.ServerWebExchange;
  * and others. Specific to a Gateway
  *
  * Copied from WebFilter
+ *  有3中子类实现：
+ *  1. GatewayFilterFactory 内部实现类，在每个 GatewayFilterFactory 实现类的 #apply(Tuple) 方法里，都声明了一个实现 GatewayFilter 的内部类
  *
  * @author Rossen Stoyanchev
  * @since 5.0

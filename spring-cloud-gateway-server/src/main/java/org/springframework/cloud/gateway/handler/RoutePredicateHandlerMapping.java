@@ -83,7 +83,7 @@ public class RoutePredicateHandlerMapping extends AbstractHandlerMapping {
 			return Mono.empty();
 		}
 		exchange.getAttributes().put(GATEWAY_HANDLER_MAPPER_ATTR, getSimpleName());
-
+		// 查找路由
 		return lookupRoute(exchange)
 				// .log("route-predicate-handler-mapping", Level.FINER) //name this
 				.flatMap((Function<Route, Mono<?>>) r -> {

@@ -73,9 +73,11 @@ public class FilteringWebHandler implements WebHandler {
 
 	@Override
 	public Mono<Void> handle(ServerWebExchange exchange) {
+		// 获取所有的路由
 		Route route = exchange.getRequiredAttribute(GATEWAY_ROUTE_ATTR);
+		// 路由配置的 filters
 		List<GatewayFilter> gatewayFilters = route.getFilters();
-
+		// 将 全局filter 和 route filter 合并
 		List<GatewayFilter> combined = new ArrayList<>(this.globalFilters);
 		combined.addAll(gatewayFilters);
 		// TODO: needed or cached?
