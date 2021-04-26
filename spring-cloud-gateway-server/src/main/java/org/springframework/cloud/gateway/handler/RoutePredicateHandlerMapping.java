@@ -92,7 +92,6 @@ public class RoutePredicateHandlerMapping extends AbstractHandlerMapping {
 						logger.debug(
 								"Mapping [" + getExchangeDesc(exchange) + "] to " + r);
 					}
-
 					exchange.getAttributes().put(GATEWAY_ROUTE_ATTR, r);
 					return Mono.just(webHandler);
 				}).switchIfEmpty(Mono.empty().then(Mono.fromRunnable(() -> {
@@ -126,6 +125,7 @@ public class RoutePredicateHandlerMapping extends AbstractHandlerMapping {
 
 	protected Mono<Route> lookupRoute(ServerWebExchange exchange) {
 		return this.routeLocator.getRoutes()
+				// 这里 是 循环 匹配路由 如果 路由数据比较多，会有性能问题
 				// individually filter routes so that filterWhen error delaying is not a
 				// problem
 				.concatMap(route -> Mono.just(route).filterWhen(r -> {

@@ -18,10 +18,10 @@ This project provides an API Gateway built on top of the Spring Ecosystem, inclu
 * Java 8
 * Spring Framework 5
 * Spring Boot 2
-* Dynamic routing
-* Route matching built into Spring Handler Mapping
-* Route matching on HTTP Request (Path, Method, Header, Host, etc...)
-* Filters scoped to Matching Route
+* Dynamic routing 动态路由
+* Route matching built into Spring Handler Mapping 路由匹配内置在 Spring Handler Mapping 中
+* Route matching on HTTP Request (Path, Method, Header, Host, etc...) 支持 Http Request 的各种属性进行匹配
+* Filters scoped to Matching Route 过滤器的作用范围可以是 某个具体匹配到的路由
 * Filters can modify downstream HTTP Request and HTTP Response (Add/Remove Headers, Add/Remove Parameters, Rewrite Path, Set Path, Hystrix, etc...)
 * API or configuration driven
 * Supports Spring Cloud `DiscoveryClient` for configuring Routes

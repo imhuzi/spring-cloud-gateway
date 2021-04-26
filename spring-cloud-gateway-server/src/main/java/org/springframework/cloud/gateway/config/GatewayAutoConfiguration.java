@@ -167,6 +167,8 @@ import static org.springframework.cloud.gateway.config.HttpClientProperties.Pool
 import static org.springframework.cloud.gateway.config.HttpClientProperties.Pool.PoolType.FIXED;
 
 /**
+ *  spring cloud gateway 自动配置 入口类
+ *
  * @author Spencer Gibb
  * @author Ziemowit Stolarczyk
  * @author Mete Alpaslan Katırcıoğlu
@@ -192,6 +194,11 @@ public class GatewayAutoConfiguration {
 		return new RouteLocatorBuilder(context);
 	}
 
+	/**
+	 * 配置文件配置的路由
+	 * @param properties
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean
 	public PropertiesRouteDefinitionLocator propertiesRouteDefinitionLocator(
@@ -199,16 +206,27 @@ public class GatewayAutoConfiguration {
 		return new PropertiesRouteDefinitionLocator(properties);
 	}
 
+	/**
+	 * 内存 路由配置
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean(RouteDefinitionRepository.class)
 	public InMemoryRouteDefinitionRepository inMemoryRouteDefinitionRepository() {
 		return new InMemoryRouteDefinitionRepository();
 	}
 
+	/**
+	 * 路由 定义 定位器, 返回的实例是  复合路由定义定位器
+	 *
+	 * @link {@link CompositeRouteDefinitionLocator}
+	 * @param routeDefinitionLocators, 注入 所有 RouteDefinitionLocator bean, 包括 RouteDefinitionRepository
+	 * @return
+	 */
 	@Bean
 	@Primary
-	public RouteDefinitionLocator routeDefinitionLocator(
-			List<RouteDefinitionLocator> routeDefinitionLocators) {
+	public RouteDefinitionLocator routeDefinitionLocator(List<RouteDefinitionLocator> routeDefinitionLocators) {
+		// 复合路由定义定位器
 		return new CompositeRouteDefinitionLocator(
 				Flux.fromIterable(routeDefinitionLocators));
 	}

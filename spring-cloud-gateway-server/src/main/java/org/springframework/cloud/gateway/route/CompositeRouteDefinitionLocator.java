@@ -26,6 +26,8 @@ import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.util.IdGenerator;
 
 /**
+ * 组合路由定位器，  将 多个 RouteDefinitionLocator bean 定义的路由 合并
+ *
  * @author Spencer Gibb
  */
 public class CompositeRouteDefinitionLocator implements RouteDefinitionLocator {

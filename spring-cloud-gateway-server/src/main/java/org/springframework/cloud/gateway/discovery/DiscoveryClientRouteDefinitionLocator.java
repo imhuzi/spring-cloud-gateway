@@ -44,6 +44,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * TODO: change to RouteLocator? use java dsl
+ * 从注册中心 装载路由
  *
  * @author Spencer Gibb
  */
